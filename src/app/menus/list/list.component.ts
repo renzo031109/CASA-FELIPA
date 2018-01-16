@@ -17,10 +17,10 @@ export class ListComponent implements OnInit {
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.getBooks();
+    this.getMenus();
   }
 
-  getBooks() {
+  getMenus() {
     this.menuStoreService
       .getMenus()
       .subscribe(response => {
@@ -29,8 +29,8 @@ export class ListComponent implements OnInit {
       });
   }
 
-  deleteBook(id: number) {
-    this.menusList = this.menusList.filter(book => book.id !== id);
+  deleteMenu(id: number) {
+    this.menusList = this.menusList.filter(menu => menu.id !== id);
     this.menuStoreService.deleteMenu(id)
       .subscribe(result => {
         if (result.ok) {
@@ -38,7 +38,7 @@ export class ListComponent implements OnInit {
         } else {
           this.deniedSnackBar();
         }
-        this.getBooks();
+        this.getMenus();
       });
   }
 

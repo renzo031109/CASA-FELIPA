@@ -14,3 +14,11 @@ md-sidenav {
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+.casa-felipa-logo{
+  display: inline-block;
+  margin-top: 10px;
+  max-width: 100%;
+  height: auto;
+
+}

@@ -1,16 +1,19 @@
 <div fxLayout="column" fxFlex>
 
-  <mat-toolbar color="primary">
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>Menu Store</span>
+  <mat-toolbar color="accent">
+
+    <span><img src="../assets/casa-felipa-logo.jpg"></span> 
+    <!-- <span>Menu Store</span>  -->
     <span class="spacer"></span>
+
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>      
+    </button>     
     <button mat-mini-fab (click)="openAddMenuDialog()">
       <mat-icon>add</mat-icon>
     </button>
   </mat-toolbar>
-
+ 
   <mat-sidenav-container fxFlex>
     <mat-sidenav mode="over" #sidenav>
       <mat-nav-list>

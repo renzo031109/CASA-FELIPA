@@ -20,6 +20,11 @@ import { UserRegistrationComponent } from './menus/user-registration/user-regist
 
 import { RouterModule, Routes } from '@angular/router';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+import { environment } from '../environments/environment';
+
 const routes: Routes = [
   {path: '', redirectTo: 'menus', pathMatch: 'full'},
   {path: 'menus', component: MenusContainerComponent },
@@ -42,7 +47,9 @@ const routes: Routes = [
     FlexLayoutModule,
     AppMaterialModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
   providers: [MenuStoreService],
   bootstrap: [AppComponent],

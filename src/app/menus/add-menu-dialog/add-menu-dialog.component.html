@@ -1,3 +1,4 @@
+<div class="formdialog">
 <h3>Add Menu</h3>
 <form #form="ngForm" (ngSubmit)="dialogRef.close(form.value)" ngNativeValidate>
 
@@ -6,25 +7,21 @@
     <mat-input-container>
       <input matInput ngModel name="title" placeholder="Menu Title" required>
     </mat-input-container>
-
+    
     <mat-input-container>
-      <input matInput ngModel name="authors" placeholder="Authors" required>
+      <input matInput ngModel name="description" placeholder="Description" required>
     </mat-input-container>
 
     <mat-input-container>
-      <input matInput ngModel name="published" placeholder="Published" required>
+      <input matInput ngModel name="group" placeholder="Group" required>
     </mat-input-container>
 
     <mat-input-container>
-      <input matInput ngModel name="isbn" placeholder="ISBN" required>
+      <input matInput ngModel name="price" placeholder="Price" required>
     </mat-input-container>
 
     <mat-input-container>
       <input matInput ngModel name="coverImage" placeholder="Cover Image" required>
-    </mat-input-container>
-
-    <mat-input-container>
-      <textarea matInput ngModel name="description" placeholder="Description" rows="3" cols="60" required></textarea>
     </mat-input-container>
 
   </div>
@@ -34,3 +31,4 @@
     <button mat-button color="accent">Save Book</button>
   </mat-dialog-actions>
 </form>
+</div>
