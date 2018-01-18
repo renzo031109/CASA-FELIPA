@@ -9,11 +9,7 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styles: [`
-  md-sidenav {
-    width: 300px;
-  }
-`]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   links = [

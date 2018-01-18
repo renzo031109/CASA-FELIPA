@@ -10,7 +10,7 @@ import { Menus } from './menus';
 @Injectable()
 export class MenuStoreService {
 
-  baseUrl = 'https://my-json-server.typicode.com/renzo031109/sample-only/Books/';
+  baseUrl = 'https://my-json-server.typicode.com/renzo031109/sample-only/menus/';
   headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) {
