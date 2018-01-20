@@ -21,9 +21,10 @@ import { UserRegistrationComponent } from './menus/user-registration/user-regist
 import { RouterModule, Routes } from '@angular/router';
 
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
+
+import { DataService } from './menus/data.service';
 
 const routes: Routes = [
   {path: '', redirectTo: 'menus', pathMatch: 'full'},
@@ -48,10 +49,10 @@ const routes: Routes = [
     AppMaterialModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireModule.initializeApp(environment.firebase, 'angularfs'),
+    AngularFirestoreModule,
   ],
-  providers: [MenuStoreService],
+  providers: [MenuStoreService, DataService],
   bootstrap: [AppComponent],
   entryComponents: [AddMenuDialogComponent]
 })
