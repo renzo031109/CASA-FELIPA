@@ -30,7 +30,7 @@ export class DataService {
   }
 
   deleteItem(menu: DataType) {
-    this.menuDoc = this.afs.doc(`items/${menu.id}`);
+    this.menuDoc = this.afs.doc(`menus/${menu}`);
     this.menuDoc.delete();
   }
 
