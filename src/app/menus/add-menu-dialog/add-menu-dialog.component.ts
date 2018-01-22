@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { DataType } from '../models/data-type';
-import { DataService } from 'app/menus/data.service';
+import { DataService } from '../../menus/data.service';
+
+import { Upload } from '../models/upload';
+import { UploadService } from '../upload.service';
 
 @Component({
   selector: 'app-add-menu-dialog',
@@ -10,6 +13,11 @@ import { DataService } from 'app/menus/data.service';
   styleUrls: ['./add-menu-dialog.component.scss']
 })
 export class AddMenuDialogComponent implements OnInit {
+
+  selectedFiles: FileList;
+  currentFileUpload: Upload;
+  progress: {percentage: number} = {percentage: 0}
+
   dataType: DataType = {
     id: '',
     name: '',
@@ -35,5 +43,18 @@ export class AddMenuDialogComponent implements OnInit {
       // this.dataType.Image = '';
     }
   }
+
+////
+
+selectFile(event) {
+  this.selectedFiles = event.target.files;
+}
+
+upload() {
+  const file = this.selectedFiles.item(0);
+  this.currentFileUpload = new Upload(file);
+  this.dataService.pushFileToStorage(this.currentFileUpload, this.progress)
+}
+
 
 }
