@@ -14,47 +14,42 @@ import { UploadService } from '../upload.service';
 })
 export class AddMenuDialogComponent implements OnInit {
 
-  selectedFiles: FileList;
-  currentFileUpload: Upload;
-  progress: {percentage: number} = {percentage: 0}
-
-  dataType: DataType = {
-    id: '',
-    name: '',
-    description: '',
-    group: '',
-    price: 0,
-    Image: ''
-  };
+  menuName: string;
+  description: string;
+  group: string;
+  price: number;
+  image: any;
 
   constructor(private dialogRef: MatDialogRef<AddMenuDialogComponent>,
-              private dataService: DataService) { }
+              private dataService: DataService,
+              // private uploadService: UploadService
+              ) { }
 
   ngOnInit() {
   }
 
-  onSubmit(dataType: DataType) {
-    if (this.dataType.name !== '') {
-      this.dataService.addMenu(this.dataType);
-      // this.dataType.name = '';
-      // this.dataType.description = '';
-      // this.dataType.group = '';
-      // this.dataType.price = 0;
-      // this.dataType.Image = '';
-    }
-  }
+  onSubmit() {
+    let listing = {
+      menuName: this.menuName,
+      description: this.description,
+      group: this.group,
+      price: this.price
+    };    
+    console.log(listing);
+  //  this.uploadService.addListing(listing);
 
+  }
 ////
 
-selectFile(event) {
-  this.selectedFiles = event.target.files;
-}
+// selectFile(event) {
+//   this.selectedFiles = event.target.files;
+// }
 
-upload() {
-  const file = this.selectedFiles.item(0);
-  this.currentFileUpload = new Upload(file);
-  this.dataService.pushFileToStorage(this.currentFileUpload, this.progress)
-}
+// upload() {
+//   const file = this.selectedFiles.item(0);
+//   this.currentFileUpload = new Upload(file);
+//   this.dataService.pushFileToStorage(this.currentFileUpload, this.progress)
+// }
 
 
 }

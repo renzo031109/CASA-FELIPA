@@ -25,6 +25,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 
 import { DataService } from './menus/data.service';
+import { UploadService } from './menus/upload.service';
 
 const routes: Routes = [
   {path: '', redirectTo: 'menus', pathMatch: 'full'},
@@ -52,7 +53,7 @@ const routes: Routes = [
     AngularFireModule.initializeApp(environment.firebase, 'angularfs'),
     AngularFirestoreModule,
   ],
-  providers: [MenuStoreService, DataService],
+  providers: [MenuStoreService, DataService, UploadService],
   bootstrap: [AppComponent],
   entryComponents: [AddMenuDialogComponent]
 })

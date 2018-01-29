@@ -1,40 +1,52 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import * as firebase from 'firebase';
-import { Upload } from './models/upload';
+import { Listing } from './models/listing';
+import 'firebase/storage';
+// import { GalleryImages } from 'app/menus/models/galleryImages';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UploadService {
-
-  constructor(private db: AngularFireDatabase) {}
-
+  
   private basePath = '/uploads';
+  private listing: Observable<Listing[]>;
+  // private gallery: Observable<GalleryImages[]>;
 
-  pushFileToStorage(fileUpload: Upload, progress: {percentage: number}) {
-    const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef.child(`${this.basePath}/${fileUpload.file.name}`).put(fileUpload.file);
+  constructor(private db: AngularFireDatabase) { }
+
+  addListing(listing) {
+    let storageRef = firebase.storage().ref();
+     for(let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]]){
+      let path = `/${this.basePath}/${selectedFile.name}`;
+      let uploadTask = storageRef.child(path).put(selectedFile);
 
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      // three observers
+      // 1.) state_changed observer
       (snapshot) => {
-        // in progress
-        const snap = snapshot as firebase.storage.UploadTaskSnapshot;
-        progress.percentage = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
+        // upload in progress
+        // upload.progress = (uploadTask.snapshot.bytesTransferred / uploadTask.snapshot.totalBytes) * 100;
+        // console.log(upload.progress);
       },
+      // 2.) error observer
       (error) => {
-        // fail
-        console.log(error)
+        // upload failed
+        console.log(error);
       },
-      () => {
-        // success
-        fileUpload.url = uploadTask.snapshot.downloadURL;
-        fileUpload.name = fileUpload.file.name;
-        this.saveFileData(fileUpload);
+      // 3.) success observer
+      (): any => {
+        listing.image = uploadTask.snapshot.downloadURL;
+        // listing.imgName = listing.file.name;
+        this.saveFileData(listing);
+        console.log(listing);
       }
+    
     );
   }
-
-  private saveFileData(fileUpload: Upload) {
-    this.db.list(`${this.basePath}/`).push(fileUpload);
   }
-
+  private saveFileData(listing) {
+    this.db.list(`${this.basePath}/`).push(listing);
+    console.log('File saved!: ' + listing.image);
+  }
 }
